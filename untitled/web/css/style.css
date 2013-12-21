@@ -1,0 +1,224 @@
+body{
+    margin: 0;
+    padding: 0;
+    min-width: 1000px;
+    font-family: Verdana;
+    font-size: 12px;
+    color: #000;
+    background: linear-gradient(#d3f5be, #629c4b);
+}
+a{
+    color: #000;
+}
+a:hover{
+    text-decoration: none;
+}
+textarea:focus, textarea:focus, input[type="text"]:focus{
+    outline: 1px solid #1b6000;
+}
+#wrapper{
+    width: 1000px;
+    margin: 20px auto;
+    box-shadow: 2px 2px 20px 3px #333;
+    overflow: hidden;
+    padding-bottom: 10px;
+}
+.warning{color:#f00;}
+th, td{border: 1px solid #1b6000;}
+a.button{
+    text-decoration: none;
+    color: #fff;
+    font-weight: bold;
+    padding: 2px 5px;
+    margin: 0;
+    border: 1px solid #aaa;
+    background: linear-gradient(#b9ffa9, #298904);
+    cursor: pointer;
+}
+a.button:hover{
+    background: linear-gradient(#dbffcb, #187803);
+}
+.submit{
+    text-decoration: none;
+    color: #FFF;
+    font-weight: bold;
+    font-size: 11px;
+    padding: 2px 10px 5px;
+    margin: 0;
+    border: 1px solid #FFFCFC;
+    border-radius: 15px;
+    background: linear-gradient(#E2E2E2, #878887);
+    line-height: 30px;
+    cursor: pointer;
+}
+.alert{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: none;
+    transition: 200ms;
+}
+.back{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #000;
+    opacity: 0.5;
+    z-index: 1;
+}
+.message-outer{
+    width: 400px;
+    height: 140px;
+    margin: 100px auto 0 auto;
+    position: relative;
+    text-align: center;
+}
+.message-inner{
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: #fff;
+    width: 100%;
+    height: 100%;
+    z-index: 5;
+}
+
+#header{
+    geight: 100px;
+}
+#main-menu{
+    list-style: none;
+    padding: 0;
+    margin: 30px 8px;
+    overflow: hidden;
+    text-align: center;
+}
+#main-menu li{
+     display: inline-block;
+}
+#main-menu li a{
+    text-decoration: none;
+    color: #777;
+    font-weight: bold;
+    padding: 10px 15px;
+    margin: 0;
+    line-height: 40px;
+    border: 1px solid #aaa;
+    background: linear-gradient(#b9ffa9, #298904);
+}
+#main-menu li + li a{
+    border-left: none;
+}
+#main-menu li a:hover, #main-menu li a.active{
+    color: #fff;
+    border-color: #fff;
+}
+#main-menu li:first-child a{
+    border-radius: 10px 0px 0px 10px;;
+}
+#main-menu li:last-child a{
+    border-radius: 0px 10px 10px 0px;;
+}
+#content{
+    padding: 10px 20px;
+}
+#column-right+#content{
+    margin-right: 300px;
+}
+#column-right{
+    width: 300px;
+    float: right;
+    overflow: hidden;
+    margin-bottom: 30px;
+}
+#column-right ul{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+#column-right ul li{
+    height: 25px;
+    position: relative;
+
+}
+#column-right ul li a{
+    position: absolute;
+    width: 100%;
+}
+#invest textarea, #freeze textarea{
+    width: 290px;
+    height: 60px;
+    resize: none;
+}
+
+
+/*таблицы с вкладами*/
+table.list{
+    width: 980px;
+    margin: 10px auto;
+    font-size: 12px;
+    border-spacing: 0;
+}
+.list td{
+    text-align: right;
+    padding: 5px 10px;
+    margin: 0;
+}
+.list td:last-child{
+    border: none;
+    vertical-align: middle;
+    text-align: center;
+}
+
+
+/*подробная информация*/
+table#info{
+    font-size: 12px;
+    border-spacing: 0;
+}
+#info td{
+    text-align: right;
+    padding: 5px 10px;
+    margin: 0;
+    border: none;
+    vertical-align: top;
+}
+#info td:last-child{
+    text-align: left;
+}
+
+/*история операций*/
+#content+h2{
+    margin-left: 20px;
+}
+table#history{
+    font-size: 12px;
+    border-spacing: 0;
+    width: 980px;
+    border: 1px solid #1b6000;
+    margin: 0 auto;
+    margin-bottom: 10px;
+}
+#history td{
+    padding: 5px 10px;
+    margin: 0;
+    vertical-align: top;
+    border-collapse: collapse;
+}
+#history td:first-child{
+    text-align: center;
+    width: 100px;
+}
+#history td:last-child{
+    text-align: right;
+    width: 140px;
+}
+#history+a{
+    float: right;
+    margin-bottom: 20px;
+    margin-right: 20px;
+}
