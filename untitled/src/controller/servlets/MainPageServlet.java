@@ -13,6 +13,8 @@ import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 /**
  * главная страница
@@ -28,9 +30,11 @@ public class MainPageServlet extends HttpServlet{
             req.getRequestDispatcher("welcome.jsp").forward(req,res);
             return;
         }
-        req.setAttribute("title", "Панель управления вкладами");
+        ResourceBundle rb = (ResourceBundle)this.getServletContext().getAttribute("ResourceBundle");
+        req.setAttribute("title", rb.getString("WELCOME"));
         int hot = DBOperations.getHotCount(authUser.getAdmStmt());
         if(hot<0){
+            req.setAttribute("error", rb.getString("COULD_NOT_GET_HOT_COUNT"));
             req.getRequestDispatcher("error.jsp").forward(req,res);
             return;
         }

@@ -23,7 +23,6 @@ public class IndexServlet extends HttpServlet {
             req.getRequestDispatcher("welcome.jsp").forward(req,res);
         }
         else{
-            //req.getRequestDispatcher("main.jsp").(req,res);
             res.sendRedirect("main");
         }
     }

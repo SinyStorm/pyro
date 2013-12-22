@@ -16,12 +16,11 @@
             </script>
             <table class="list">
                 <thead>
-                    <th>Текущий размер вклада</th>
-                    <th>Начальный вклад</th>
-                    <th>Начисленный бонус</th>
-                    <th>Статус вклада</th>
-                    <th>Вклад внесен</th>
-                    <th>Дата погашения обязательств</th>
+                    <th>${ResourceBundle.AMOUNT}</th>
+                    <th>${ResourceBundle.START_AMOUNT}</th>
+                    <th>${ResourceBundle.BONUS}</th>
+                    <th>${ResourceBundle.DATE}</th>
+                    <th>${ResourceBundle.RETURN_DATE}</th>
                 </thead>
                 <%
                     SimpleDateFormat formatter = new SimpleDateFormat ("s");
@@ -32,10 +31,9 @@
                     <td><%out.print(result.getAmount()); %></td>
                     <td><%out.print(result.getStartAmount()); %></td>
                     <td><%out.print(result.getBonus()); %></td>
-                    <td><%out.print(Configs.STATUS[result.getStatus()]); %></td>
                     <td><%out.print(formatter.format(result.getDateOfDep())); %></td>
                     <td><%if(result.getDateOfRet()!=null)out.print(formatter.format(result.getDateOfRet())); %></td>
-                    <td><a class="button" title="Подробная информация" href="info?id=<%out.print(result.getId()); %>">?</a></td>
+                    <td><a class="button" title="${ResourceBundle.MORE}" href="info?id=<%out.print(result.getId()); %>">?</a></td>
                  </tr>
                 <% } %>
             </table>

@@ -1,17 +1,41 @@
 package config;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Locale;
+import java.util.Properties;
+import java.util.ResourceBundle;
+
 /**
 Конфигурационные данные, глобальные переменные
  */
 public class Configs {
-    public static final String CMS_DB = "cms_db";
-    public static final String  DEP_DB = "pyramid";
-    public static final String HOST = "127.0.0.1";
-    public static final String USER = "dep_user";
-    public static final String PASSWORD = "depuser";
-
     public static final double LOSE = 0.15;
 
-    public static final String[] STATUS =  null ;
+    public static final String[] STATUS =
+            {"В ожидании", "Готов", "Инвестирован", "Заморожен"};
+    //--------------------------------------------------------------------------------------------------------------------
+    public final static String confDefault = "conf.properties";
+    public enum RequiredDBProperties {
+        cms_db,
+        dep_db,
+        host,
+        user,
+        password
+    };
 
+    public static Properties dbProperties = new Properties();
+    public static void loadDBProperties() throws IOException {
+        dbProperties.load(ClassLoader.getSystemResourceAsStream(confDefault));
+    }
+    public static void loadDBProperties(InputStream is) throws IOException {
+        dbProperties.load(is);
+        //RequiredDBProperties.cms_db. = dbProperties.getProperty("host");
+
+    }
+//---------------------------------------------------------------------------------------------------------------------
+            public static void main(String args[]){
+                //System.out.println(RequiredDBProperties.cms_db);
+
+            }
 }

@@ -4,8 +4,6 @@ import config.Configs;
 import model.AuthorizedUser;
 import model.User;
 import model.db.Queries;
-
-import javax.jms.Session;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -15,8 +13,7 @@ import java.io.IOException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.*;
-
-import static java.sql.DriverManager.getConnection;
+import java.util.ResourceBundle;
 
 /**
  * авторизация пользователя
@@ -26,14 +23,20 @@ public class LoginServlet extends HttpServlet {
     protected void service(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
         req.setCharacterEncoding("UTF-8");
         res.setCharacterEncoding("UTF-8");
+        ResourceBundle rb = (ResourceBundle)this.getServletContext().getAttribute("ResourceBundle");
         try{
-            Connection admCon = DriverManager.getConnection("jdbc:mysql://" + Configs.HOST + "/" + Configs.DEP_DB, Configs.USER, Configs.PASSWORD);
+            Connection admCon = DriverManager.getConnection("jdbc:mysql://" +
+                    Configs.dbProperties.getProperty("host") + "/" +
+                    Configs.dbProperties.getProperty("dep_db"),
+                    Configs.dbProperties.getProperty("user"),
+                    Configs.dbProperties.getProperty("password")
+            );
             Statement admStmt = admCon.createStatement();
-            String login = (String)req.getParameter("login");
-            String pwd = (String)req.getParameter("pwd");
+            String login = req.getParameter("login");
+            String pwd = req.getParameter("pwd");
             ResultSet rs = admStmt.executeQuery(Queries.GET_USER + login + "'");
             if(!rs.next()){
-                req.setAttribute("error", "Не существует пользователя с таким логином!");
+                req.setAttribute("error", rb.getString("USER_DOES_NOT_EXIST"));
                 req.getRequestDispatcher("welcome.jsp").forward(req, res);
                 return;
             }
@@ -52,20 +55,27 @@ public class LoginServlet extends HttpServlet {
             }
             pwd = sb.toString();
             if(!pwd.equals(dbPwd)){
-                req.setAttribute("error", "Пароль введен неверно!");
+                req.setAttribute("error", rb.getString("WRONG_PASSWORD"));
                 req.getRequestDispatcher("welcome.jsp").forward(req, res);
                 return;
             }
-            Connection cmsCon = DriverManager.getConnection("jdbc:mysql://" + Configs.HOST + "/" + Configs.CMS_DB, Configs.USER, Configs.PASSWORD);
+            Connection cmsCon = DriverManager.getConnection("jdbc:mysql://" +
+                    Configs.dbProperties.getProperty("host") + "/" +
+                    Configs.dbProperties.getProperty("cms_db"),
+                    Configs.dbProperties.getProperty("user"),
+                    Configs.dbProperties.getProperty("password")
+            );
             Statement cmsStmt = cmsCon.createStatement();
             User user = new User(login, pwd);
             AuthorizedUser authUser = new AuthorizedUser(user, cmsCon, admCon, cmsStmt, admStmt);
             HttpSession s = req.getSession();
             s.setAttribute("user",authUser);
-            res.sendRedirect("maim");
+            res.sendRedirect("main");
         } catch (SQLException e) {
+            req.setAttribute("error", rb.getString("COULD_NOT_CONNECT_TO_DB"));
             req.getRequestDispatcher("error.jsp").forward(req, res);
         } catch (NoSuchAlgorithmException e) {
+            req.setAttribute("error", rb.getString("COULD_NOT_RESOLVE_MD5"));
             req.getRequestDispatcher("error.jsp").forward(req, res);
         }
     }
