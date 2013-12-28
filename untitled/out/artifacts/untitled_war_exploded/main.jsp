@@ -1,3 +1,5 @@
+
+
 <%@ page import="java.text.SimpleDateFormat" %>
 <%@ page import="model.DepositesRow" %>
 <%@ page import="java.util.ArrayList" %>
@@ -34,6 +36,7 @@
 </table>
 <%} else{ %>
 <h1 align="center">${ResourceBundle.WELCOME}</h1>
+
 <% } %>
 </div>
 </body>

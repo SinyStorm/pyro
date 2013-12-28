@@ -1,5 +1,7 @@
 package controller.servlets;
 
+import com.mysql.jdbc.*;
+import com.mysql.jdbc.Driver;
 import config.Configs;
 import model.AuthorizedUser;
 import model.User;
@@ -13,6 +15,8 @@ import java.io.IOException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.*;
+import java.sql.Connection;
+import java.sql.Statement;
 import java.util.ResourceBundle;
 
 /**
@@ -25,6 +29,7 @@ public class LoginServlet extends HttpServlet {
         res.setCharacterEncoding("UTF-8");
         ResourceBundle rb = (ResourceBundle)this.getServletContext().getAttribute("ResourceBundle");
         try{
+            DriverManager.registerDriver(new Driver());
             Connection admCon = DriverManager.getConnection("jdbc:mysql://" +
                     Configs.dbProperties.getProperty("host") + "/" +
                     Configs.dbProperties.getProperty("dep_db"),
